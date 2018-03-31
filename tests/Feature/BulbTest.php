@@ -96,4 +96,36 @@ class BulbTest extends TestCase
 
         $response->assertStatus(422);
     }
+
+    /** @test */
+    public function a_bulb_can_be_updated_to_a_color()
+    {
+        $createdBulb = factory(Bulb::class)->create([
+            'device_id' => 'something-weird',
+            'model' => 'some-model',
+            'ip' => '192.10.10.10',
+            'name' => 'Some name'
+        ]);
+
+        $response = $this->putJson("/api/bulbs/{$createdBulb->id}", [
+            'color' => 'rgbw(101,102,103,104)',
+            'powered' => true
+        ]);
+
+        $response->assertStatus(200);
+    }
+    
+    /** @test */
+    public function bulbs_can_be_updated()
+    {
+        $this->withoutExceptionHandling();
+        $bulbs = factory(Bulb::class, 23)->create();
+
+        $response = $this->putJson("/api/bulbs", [
+            'color' => 'rgbw(101,102,103,104)',
+            'powered' => true
+        ]);
+
+        $response->assertStatus(200);
+    }
 }

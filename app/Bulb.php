@@ -2,11 +2,25 @@
 
 namespace App;
 
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
+use TheJawker\ControlStuff\LedFlux\ColorSetting;
+use TheJawker\ControlStuff\LedFlux\Bulb\Bulb as HardwareBulb;
 
 class Bulb extends Model
 {
     protected static $unguarded = true;
+    /** @var HardwareBulb */
+    private $hardwareBulb;
+
+    public function updateSettings(array $settings)
+    {
+        $this->hardwareBulb()->setColor(
+            ColorSetting::fromString(Arr::get($settings, 'color'))
+        );
+
+        $this->hardwareBulb()->powered(Arr::get($settings, 'powered'));
+    }
 
     public static function storeHardwareBulbs(array $hardwareBulbs)
     {
@@ -23,5 +37,14 @@ class Bulb extends Model
     public static function fromDeviceId($id)
     {
         return self::whereDeviceId($id)->first();
+    }
+
+    private function hardwareBulb()
+    {
+        if (!$this->hardwareBulb) {
+            $this->hardwareBulb = new HardwareBulb($this->ip);
+        }
+
+        return $this->hardwareBulb;
     }
 }
