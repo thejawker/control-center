@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Bulb;
 use App\Group;
+use App\GroupedBulb;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
