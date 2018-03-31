@@ -25,6 +25,11 @@ class Bulb extends Model
     public static function storeHardwareBulbs(array $hardwareBulbs)
     {
         collect($hardwareBulbs)->each(function ($bulb) {
+            $bulb = [
+                'ip' => $bulb[0],
+                'id' => $bulb[1],
+                'model' => $bulb[2]
+            ];
             self::updateOrCreate([
                 'device_id' => $bulb['id'],
             ], [

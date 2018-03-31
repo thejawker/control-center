@@ -2647,12 +2647,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thejawker/control-stuff.git",
-                "reference": "c837854100984ae825f9df6b0df7a8109094e3a5"
+                "reference": "a1928f69d20c62a10b551078b5462348977a8609"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thejawker/control-stuff/zipball/c837854100984ae825f9df6b0df7a8109094e3a5",
-                "reference": "c837854100984ae825f9df6b0df7a8109094e3a5",
+                "url": "https://api.github.com/repos/thejawker/control-stuff/zipball/a1928f69d20c62a10b551078b5462348977a8609",
+                "reference": "a1928f69d20c62a10b551078b5462348977a8609",
                 "shasum": ""
             },
             "require": {
@@ -2685,7 +2685,7 @@
                 }
             ],
             "description": "Allows you to control things, ye know.",
-            "time": "2018-03-31 11:34:43"
+            "time": "2018-03-31 12:58:55"
         },
         {
             "name": "thejawker/laravel-route-module-macro",

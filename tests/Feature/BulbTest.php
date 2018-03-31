@@ -119,10 +119,11 @@ class BulbTest extends TestCase
     public function bulbs_can_be_updated()
     {
         $this->withoutExceptionHandling();
-        $bulbs = factory(Bulb::class, 23)->create();
+//        $bulbs = factory(Bulb::class, 23)->create();
+        $this->postJson('/api/discover');
 
         $response = $this->putJson("/api/bulbs", [
-            'color' => 'rgbw(101,102,103,104)',
+            'color' => 'rgbw(255,255,255,255)',
             'powered' => true
         ]);
 
