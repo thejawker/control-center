@@ -114,16 +114,30 @@ class BulbTest extends TestCase
 
         $response->assertStatus(200);
     }
-    
+
     /** @test */
     public function bulbs_can_be_updated()
     {
         $this->withoutExceptionHandling();
 //        $bulbs = factory(Bulb::class, 23)->create();
-        $this->postJson('/api/discover');
+//        $this->postJson('/api/discover');
+        // Some real bulbs!
+        Bulb::create([
+            "ip" => "192.168.178.15",
+            "device_id" => "600194A0653F",
+            "model" => "AK001-ZJ200",
+            "name" => null,
+        ]);
+
+        Bulb::create([
+            "ip" => "192.168.178.24",
+            "device_id" => "DC4F22C0FD9C",
+            "model" => "AK001-ZJ200",
+            "name" => null,
+        ]);
 
         $response = $this->putJson("/api/bulbs", [
-            'color' => 'rgbw(255,255,255,255)',
+            'color' => 'rgbw(0,200,255,100)',
             'powered' => true
         ]);
 
