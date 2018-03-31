@@ -16,4 +16,15 @@ class BulbsController extends Controller
     {
         return response()->json(Bulb::find($id));
     }
+
+    public function update($id)
+    {
+        $bulb = Bulb::find($id);
+
+        $bulb->update(request()->validate([
+            'name' => 'between:4,64'
+        ]));
+
+        return response()->json($bulb);
+    }
 }

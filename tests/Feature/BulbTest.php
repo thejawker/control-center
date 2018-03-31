@@ -45,12 +45,55 @@ class BulbTest extends TestCase
     /** @test */
     public function a_bulb_can_be_updated()
     {
+        $this->withoutExceptionHandling();
         $createdBulb = factory(Bulb::class)->create([
             'device_id' => 'something-weird',
             'model' => 'some-model',
             'ip' => '192.10.10.10'
         ]);
 
-        $response = $this->getJson("/api/bulbs/{$createdBulb->id}");
+        $response = $this->putJson("/api/bulbs/{$createdBulb->id}", [
+            'name' => 'New Name'
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'device_id' => 'something-weird',
+            'model' => 'some-model',
+            'ip' => '192.10.10.10',
+            'name' => 'New Name'
+        ]);
+    }
+
+    /** @test */
+    public function name_must_be_more_than_3_chars()
+    {
+        $createdBulb = factory(Bulb::class)->create([
+            'device_id' => 'something-weird',
+            'model' => 'some-model',
+            'ip' => '192.10.10.10'
+        ]);
+
+        $response = $this->putJson("/api/bulbs/{$createdBulb->id}", [
+            'name' => '123'
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function name_cant_be_more_than_64_chars()
+    {
+        $createdBulb = factory(Bulb::class)->create([
+            'device_id' => 'something-weird',
+            'model' => 'some-model',
+            'ip' => '192.10.10.10'
+        ]);
+
+        $response = $this->putJson("/api/bulbs/{$createdBulb->id}", [
+            'name' => str_repeat('1', 65)
+        ]);
+
+        $response->assertStatus(422);
     }
 }

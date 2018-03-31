@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBulbsTable extends Migration
+class CreateGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateBulbsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bulbs', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('ip');
-            $table->string('device_id');
-            $table->string('model');
             $table->string('name')->nullable();
 
             $table->timestamps();
@@ -32,6 +29,6 @@ class CreateBulbsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bulbs');
+        Schema::dropIfExists('groups');
     }
 }
